@@ -23,13 +23,22 @@ force ENB_CONTADOR_8 1 0, 0 100
 force CLR_CONTADOR_8 0 1, 1 2, 0 110
 run 120
 ------------------------------
-vsim CNTRL
+vsim TEMPO_LIMITE
 add wave *
-force Ccntrl 1 0, 0 10
-force TOTIT 1 0, 0 30 
-force CLKcntrl 1 0, 0 1  -repeat 2
+force CLK_TEMPO_LIMITE 0 0, 1 1 -REPEAT 2
+force EN_TEMPO_LIMITE 1 0, 0 100
+force CLR_TEMPO_LIMITE 0 1, 1 1, 0 110
+force SEL_TEMPO_LIMITE "10" 0, "01" 22 
+run 120
+-----------------------------
 
-run 40
+-----------------------------
+rce EN_TEMPO_LIMITE 1 0, 0 100
+force CLR_TEMPO_LIMITE 0 1, 1 1, 0 110
+force SEL_TEMPO_LIMITE "00" 0, "01" 52 
+run 120
+-----------------------------
+
 -----------------------------
 vsim DTPTH
 add wave *
