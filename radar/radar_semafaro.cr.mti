@@ -1,0 +1,14 @@
+C:/Users/kaike/Desktop/radar/radar.vhd {2 {vcom -work work -2002 -explicit -stats=none C:/Users/kaike/Desktop/radar/radar.vhd
+Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 2015
+-- Loading package STANDARD
+-- Compiling entity radar
+-- Compiling architecture functionRadar of radar
+Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 2015
+** Warning: (vcom-6) -- Waiting for lock by "kaike@KAIKECC, pid = 12600
+". Lockfile is "C:/Users/kaike/Desktop/radar/work/_lock".
+
+-- Loading package STANDARD
+-- Compiling entity radar
+-- Compiling architecture functionRadar of radar
+
+} {} {}}
