@@ -1,14 +1,12 @@
-library ieee ;
-use ieee . std_logic_1164 .all;
 
 ENTITY TUDO IS
 	PORT( SWITCH_EN : IN BIT;
 	CLK : IN BIT;
 	SWITCH_SEL : IN BIT_VECTOR(1 DOWNTO 0);
 	SENSOR_MANGA, SENSOR_CAJU : IN BIT_VECTOR(1 DOWNTO 0);
-	SENSOR_ALERT_MANGA,SENSOR_ALERT_CAJU : OUT BIT;
 	S_AMARELO_MANGA, S_VERMELHO_MANGA, S_VERDE_MANGA : OUT BIT;
-	S_AMARELO_CAJU, S_VERMELHO_CAJU, S_VERDE_CAJU : OUT BIT
+	S_AMARELO_CAJU, S_VERMELHO_CAJU, S_VERDE_CAJU : OUT BIT;
+	ALERTA_MULTA_CAJU,	ALERTA_MULTA_MANGA : OUT BIT
 	);
 END TUDO;
 
@@ -24,14 +22,30 @@ COMPONENT TEMPO_LIMITE
 END COMPONENT;
 
 COMPONENT mde_b
-  port ( clk , r , w: in std_logic ;
-  vd_C, am_C, vm_C, vd_M, am_M, vm_M: out std_logic
+  port ( clk , r , w: in bit ;
+  vd_C, am_C, vm_C, vd_M, am_M, vm_M: out bit
   );
+END COMPONENT;
+
+COMPONENT radar
+	port(Sensor_A_Caju, Sensor_B_Caju, Sensor_A_Manga, Sensor_B_Manga, clk1: in bit;
+	Alert_A, Alert_B: out bit);
 END COMPONENT;
 
 SIGNAL EN_REG_RADAR,CLK_LIMITE,W_TUDO : BIT;
 
 BEGIN
+
+MULTA : radar PORT MAP(
+--SERA QUE A ORDEM DOS SENSORES IMPORTA?
+Sensor_A_Caju=>SENSOR_CAJU(0),
+Sensor_B_Caju=>SENSOR_CAJU(1),
+Sensor_A_Manga=>SENSOR_MANGA(0), 
+Sensor_B_Manga=>SENSOR_MANGA(1),
+clk1=>CLK,
+Alert_A=>ALERTA_MULTA_CAJU,
+Alert_B=>ALERTA_MULTA_MANGA
+);
 
 LIMITA : TEMPO_LIMITE PORT MAP(
   EN_TEMPO_LIMITE=> SWITCH_EN,
@@ -45,7 +59,7 @@ LIMITA : TEMPO_LIMITE PORT MAP(
 
 MDE : mde_b PORT MAP(
   clk=> CLK_LIMITE,
-  r=> NOT SWITCH_EN, --ATENÇÃO AO NOT
+  r=> SWITCH_EN,
   w=>W_TUDO,
   
   vd_C=>S_VERDE_CAJU, 
