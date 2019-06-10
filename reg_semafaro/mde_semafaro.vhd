@@ -3,7 +3,7 @@ use ieee . std_logic_1164 .all;
 
 entity mde_b is
 port ( clk , r , w: in std_logic ;
---
+--z : out std_logic 
 vd_C, am_C, vm_C, vd_M, am_M, vm_M: out std_logic);
 
 end mde_b;
