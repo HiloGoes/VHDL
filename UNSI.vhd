@@ -28,7 +28,7 @@ add wave *
 force CLK_TEMPO_LIMITE 0 0, 1 1 -REPEAT 2
 force EN_TEMPO_LIMITE 1 0, 0 100
 force CLR_TEMPO_LIMITE 0 1, 1 1, 0 110
-force SEL_TEMPO_LIMITE "10" 0, "01" 22 
+force SEL_TEMPO_LIMITE "11" 0, "00" 22 
 run 120
 -----------------------------
 
